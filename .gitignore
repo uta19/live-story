@@ -1,6 +1,7 @@
 node_modules/
 .env
 .env.*
+!.env.example
 *.local
 serviceAccountKey.local.json
 billionare-501bf-firebase-adminsdk-fbsvc-2dad5e32f5.json
