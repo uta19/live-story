@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIKO 直播页</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface: '#0f0f0f',
+            surfaceSoft: 'rgba(255,255,255,0.1)',
+            accent: '#3300ff'
+          },
+          fontFamily: {
+            misans: ['"MiSans"', '"SF Pro Display"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      background: #000;
+    }
+
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+
+    #decision-modal {
+      display: none;
+    }
+
+    #decision-modal.active {
+      display: flex;
+    }
+  </style>
+</head>
+
+<body class="font-misans text-white flex justify-center py-10">
+  <main class="w-[90vw] max-w-[420px] rounded-[32px] bg-black px-5 pt-6 pb-8 shadow-[0_30px_90px_rgba(0,0,0,0.65)]">
+    <!-- 状态栏 -->
+    <div class="flex items-center justify-between text-[17px] font-semibold">
+      <span>9:41</span>
+      <div class="flex items-center gap-1 text-xs">
+        <span class="inline-flex h-[11px] w-[18px] items-center justify-end rounded-sm border border-white/40 px-[1px]">
+          <span class="h-[8px] w-[8px] rounded-sm bg-white"></span>
+        </span>
+        <span class="inline-block h-[10px] w-[12px] rounded-[1px] border border-white/50"></span>
+        <span class="inline-flex h-[12px] w-[24px] items-center rounded-full bg-white/20">
+          <span class="ml-[2px] h-[8px] w-[16px] rounded-full bg-white"></span>
+        </span>
+      </div>
+    </div>
+
+    <!-- 顶部标题 -->
+    <header class="mt-6 flex items-center justify-between">
+      <button
+        class="h-12 w-12 rounded-full backdrop-blur bg-white/15 text-2xl leading-none flex items-center justify-center">‹</button>
+      <div class="text-center">
+        <p id="play-title" class="text-2xl font-semibold">心动的信号</p>
+        <p class="mt-1 text-xs text-white/40">该数值由点击头像次数产生</p>
+      </div>
+      <button
+        class="h-12 w-12 rounded-full backdrop-blur bg-white/15 text-xl leading-none flex items-center justify-center">⋯</button>
+    </header>
+
+    <!-- 排行头像 -->
+    <div class="mt-6 flex gap-4 overflow-x-auto scrollbar-none">
+      <div class="flex min-w-[64px] flex-col items-center text-xs">
+        <div class="relative">
+          <img
+            src="https://s3-alpha-sig.figma.com/img/db3f/cb3c/94c78966bd84a97db22b4587e11fa2db?Expires=1760313600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=cEeIJdtzGnfMwYmYalDSzMjvJieMSs687kNo9Z6vRlp8~AtERPS5JHju~t9R4u7US8LM9KYHJW65IDEKfrCdGyVHBH~IoRRRSX4GPHi9sugDNoc47ybQ~OFUxbV2ZmnngDoV0o-NOR8CowSEEM~609hcfcxUCWkoBI42S6ALgTJZRckltUO0wYvt8-zF3X9GQczdq4V3u6ZTpUcfQA4~yPdSoYEgbrZGi-ECPEPvlalZ5JWgupOibGS0bdBaMjpHZ-4IgH-GHrT1~P~4rtwmxsNs0Ky~c8eNyXI~u~DYSrKVamZFCfkgUY4okeo5m4BajXGA-U5vSpESKkXFQWxLcw__"
+            alt="213123" class="h-16 w-16 rounded-full border-2 border-black/70 object-cover" />
+          <div
+            class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
+            style="background:#ff0000;">1</div>
+        </div>
+        <p class="mt-2 opacity-60">213123</p>
+      </div>
+      <div class="flex min-w-[64px] flex-col items-center text-xs">
+        <div class="relative">
+          <img
+            src="https://s3-alpha-sig.figma.com/img/6e7c/c9d2/dba20407926722597c72f470c87ada2a?Expires=1760313600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Qsf7kECGwGZNiqs3j4m78GQSa2p5iiNWLgvURGknuwHKssKGFyHuWFNbjdWCQ8oxsxxO2wo9IaT1rfeMUX~R4q3U9pfOePSH-0hJUCTBDWWW0-Cj6sFCY-XIqRYsO3PIJ-t9GmzMv8M5-PW5kbOHFt7SeSq8Wb8bCCSI8HObspMFgKPCmSFlpqBHbvoc2F1NGZliDgnwY7H87icrTfCDh~UjkQ0hP~T54F-iP1FmrjIUjrG0tJQs~WL1t4079STci-8yL1EmvXVh4uQwRLQZaDBJkw7SfajCeWsHyY71K3bAq8hepGVI~hB8oVNCRKH1IBXfQY3PEcDmSIRqNVaCUQ__"
+            alt="45366" class="h-16 w-16 rounded-full border-2 border-black/70 object-cover" />
+          <div
+            class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
+            style="background:#be6e38;">4</div>
+        </div>
+        <p class="mt-2 opacity-60">45366</p>
+      </div>
+      <div class="flex min-w-[64px] flex-col items-center text-xs">
+        <div class="relative">
+          <img
+            src="https://s3-alpha-sig.figma.com/img/6c30/beae/1b6da174473dc85b21ba3237a7d65629?Expires=1760313600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=s2ftPAD2ZpwhxvsQDmIQcZwnG7k2hPQ20AWIOS8l9TVrAtzwixerarItbqsDlUPOdpvId4GFc-4vr3b2bRXONbKSuyCMuBEKCS982mHZKAGPOrgh0Ck02EBoyMpX32NsQJ~Cvn8-txKCMREmtpR7yvf5trXULMaj6knH3zgJC6p66zUILpmsrOTVlUD6PzhKseGWnSl9KZuNmuXoTJQ7urvSRZ~QUsKQtETxEpSzCNJ-u3IP6zHIfOEwvHss7SUEZdZWqZXUL63GtvKibTqxXJ~hmwBTKC8zFLZQQSpDbNSrdk-MnmEgYRzbCqJx2YDx1jaGf~PjVPw3RfhC5q2rwg__"
+            alt="12334" class="h-16 w-16 rounded-full border-2 border-black/70 object-cover" />
+          <div
+            class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
+            style="background:#b25341;">5</div>
+        </div>
+        <p class="mt-2 opacity-60">12334</p>
+      </div>
+      <div class="flex min-w-[64px] flex-col items-center text-xs">
+        <div class="relative">
+          <img
+            src="https://s3-alpha-sig.figma.com/img/f441/b82a/750e620e798f1ebc519411ac2e850218?Expires=1760313600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=c2q-3upu6gE9iJLOuOPffpgWbBwLpNrzgF9Ob1cE9XEDuRcPK-d0nObjZ-9AQEaZ9adwbnGSY8m4TAHPrWRoZzlNAGPNcCxdDYRoUvmEAA0udhV6ToE03ne6aMWZ4yTwCtiQ2r8whXwKo2hl2fEmTSzXh~5mTI5RKJKzhGgyrRZwwTBOs~4vSBLGIisDdNIS0F6wVae4aqiS4QPLRVhxMAMa-avj4M8Mm-7i3NQCR0EOBpyvqd7RPZ6k5ydrajRstWWYmHEQCMI3JPAZLhNWv1MpKSZE137iw4j7xe~tCDN3CPKzB-DTxvMopr~Frn4zL5AwdiNqrAXNqg8lOo4FBg__"
+            alt="12314" class="h-16 w-16 rounded-full border-2 border-black/70 object-cover" />
+          <div
+            class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
+            style="background:#ff409f;">3</div>
+        </div>
+        <p class="mt-2 opacity-60">12314</p>
+      </div>
+      <div class="flex min-w-[64px] flex-col items-center text-xs">
+        <div class="relative">
+          <img
+            src="https://s3-alpha-sig.figma.com/img/5d4a/986c/7d1a86eb9ce6bc8e973f0312e93daca6?Expires=1760313600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=B5JJ5gZ-u6JbbMYneNe~gkPfr6ryTC8G98dqxi4-fHwluVRgLPQaMa1B~WpEwIBHjLAQy-cpAVdnZsbmbYcmrxZKswUyaxTmaA7lksL0KHiCbfijNT88ClXpnaPFLhmDbIyVNfA9KUt6nXAzo3UVxperCosutWIqF8-9QyfBYHlc4~nsze4ZtpNxnEUoceKxEQNYtlMbskxU7hv17TQE8Gio4NM9cUa9VnmzzxhXOQlN-IEwgt-mgaJwDgr6240si4yVSK5Lv14QDbILxnakI74EqTT5olQP3Bbos301Vgev4P-7uJt9BTiar93LqSRO-UYMO-f2WEovRGyX8ZvOxw__"
+            alt="2526" class="h-16 w-16 rounded-full border-2 border-black/70 object-cover" />
+          <div
+            class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
+            style="background:#8e0613;">6</div>
+        </div>
+        <p class="mt-2 opacity-60">2526</p>
+      </div>
+      <div class="flex min-w-[64px] flex-col items-center text-xs">
+        <div class="relative">
+          <img
+            src="https://s3-alpha-sig.figma.com/img/fdae/5086/b42944201fe44b28d65ba9a32f4a5e21?Expires=1760313600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=dBrYiiSxhMDTw73OeoepZdUYAIPDcEE1rgsqVJln7Xk~ujZzsREy5ycoJIOlgkTuV4-BZRGmHB-qxcwLGcHq5N~P7ctBFNtJLOzp4s7AoNCaGLFSIxe7dZl~ITN6ZbhqXwSqaPk6zm75c8fqk6Ful0TDUcF-A6NhArvRAUtOMNZ2YGTHCXAtz2wzhqSHnZtR6qBwvwiGtqyKFSjGjCIQT~6d~TH3QczQMNKzcyw2w7dQEA0vloZ8wt-t0Af3~1TnbSZdy6LvzTdaMHUPHQqSHLcULYanfmxsXquv4nuQBrv8ZC7p6ixQVnG6cIZTUqsc6~REPOH77por2p3p6-GNrg__"
+            alt="1213" class="h-16 w-16 rounded-full border-2 border-black/70 object-cover" />
+          <div
+            class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
+            style="background:#e67b1a;">2</div>
+        </div>
+        <p class="mt-2 opacity-60">1213</p>
+      </div>
+    </div>
+
+    <!-- 直播剧情卡片 -->
+    <section class="mt-6 rounded-[28px] bg-white/10 overflow-hidden">
+      <div class="relative">
+        <img id="story-image"
+          src="https://s3-alpha-sig.figma.com/img/ff7c/a211/7a7a842ed09bec88abd88a7c0dfe8fdb?Expires=1760313600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Qilz6GnCFA3MQpny21H3Ycf3V2k~vR5ITw5n2HKNzouNcsZxnYop5E18a5un2scUbt2zPkLALVvnjFfEDF0xMHr~rkt4K6IMH39jwLWOFzJEsJbxx1k~MbCOcd83rx9730JLM1STbTe1WX2mVjSHtLGg4-jpKGrb~Jh0aYcx7j5cr~87ae2McqUAuj~ophqQZwEJF4x3i7Mwfi61p2mPtaJCJoHoJYKyEp6dkx2SROLYYuM5gegwjjxUcrSaOk3TiwDX97l9jADTxPQsGPH2VH0bNzqI0kA929yod91BdwTK9kSQ5UANUTSJNDJHjGqbenQ6v0R3tft3S3RRGMNxlA__"
+          alt="直播封面" class="h-[240px] w-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90"></div>
+        <span class="absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 text-sm font-semibold">直播</span>
+        <span id="audience-prompt"
+          class="absolute left-1/2 top-4 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold">女1会不会喜欢男4</span>
+        <span class="absolute right-4 top-4 rounded-full bg-black/60 px-3 py-1 text-sm font-semibold">💊 吐真剂</span>
+        <button id="next-block"
+          class="absolute right-4 bottom-4 flex items-center gap-1 rounded-full bg-white px-3 py-1 text-sm font-semibold text-black">
+          <span>▶</span>
+          播放
+        </button>
+        <div id="story-dialogues" class="absolute inset-x-0 bottom-0 space-y-2 px-4 pb-4"></div>
+      </div>
+      <div class="space-y-3 px-4 py-4 text-sm">
+        <div class="flex items-center justify-between">
+          <p id="progress-title" class="font-semibold">实时进度</p>
+          <span class="text-xs text-white/50" id="story-meta">段落 1/1</span>
+        </div>
+        <div class="relative h-6 overflow-hidden rounded-full bg-white/20">
+          <div id="progress-fill" class="absolute inset-y-0 left-0 bg-[#3300ff]" style="width: 50%"></div>
+          <div class="absolute inset-0 flex items-center justify-between px-3 text-xs">
+            <span id="vote-left">会 0票</span>
+            <span id="vote-right">不会 0票</span>
+          </div>
+        </div>
+        <div id="vote-options" class="space-y-2 text-xs text-white/60"></div>
+      </div>
+    </section>
+
+    <!-- 弹幕列表 -->
+    <section class="mt-6 rounded-[24px] bg-white/5 p-5">
+      <div class="space-y-2 text-xs leading-relaxed max-h-60 overflow-y-auto scrollbar-none" id="danmu-list"></div>
+      <form id="danmu-form" class="mt-4 flex items-center gap-3">
+        <div class="flex-1 rounded-full bg-white/12 px-4 py-3 text-sm text-white/70" contenteditable="true"
+          id="danmu-input">说点什么...</div>
+        <button type="submit"
+          class="h-12 w-12 rounded-full bg-white/15 text-lg leading-none flex items-center justify-center">🗑</button>
+        <button type="button"
+          class="h-12 w-12 rounded-full bg-white/15 text-lg leading-none flex items-center justify-center">🎁</button>
+      </form>
+    </section>
+
+    <div class="mt-6 flex justify-center">
+      <div class="h-[5px] w-[120px] rounded-full bg-white/40"></div>
+    </div>
+  </main>
+
+  <div id="decision-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6">
+    <div class="w-full max-w-sm rounded-2xl bg-[#111] p-6 shadow-2xl space-y-4">
+      <p id="decision-prompt" class="text-sm font-semibold"></p>
+      <div id="decision-options" class="space-y-2"></div>
+      <button id="decision-close" class="w-full rounded-xl bg-white/10 py-2 text-sm text-white/60">稍后处理</button>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = (() => {
+      if (window.location.protocol === 'file:') return 'http://localhost:3001';
+      if (window.location.hostname === 'localhost') return 'http://localhost:3001';
+      return '';
+    })();
+
+    const viewerId = (() => {
+      const cached = localStorage.getItem('viewerId');
+      if (cached) return cached;
+      const id = 'viewer-' + Math.random().toString(36).slice(2, 9);
+      localStorage.setItem('viewerId', id);
+      return id;
+    })();
+
+    const playerId = (() => {
+      const cached = localStorage.getItem('playerId');
+      if (cached) return cached;
+      const id = 'player-' + Math.random().toString(36).slice(2, 9);
+      localStorage.setItem('playerId', id);
+      return id;
+    })();
+
+    const refs = {
+      playTitle: document.getElementById('play-title'),
+      storyImage: document.getElementById('story-image'),
+      storyDialogues: document.getElementById('story-dialogues'),
+      storyMeta: document.getElementById('story-meta'),
+      nextBtn: document.getElementById('next-block'),
+      progressFill: document.getElementById('progress-fill'),
+      voteLeft: document.getElementById('vote-left'),
+      voteRight: document.getElementById('vote-right'),
+      voteOptions: document.getElementById('vote-options'),
+      progressTitle: document.getElementById('progress-title'),
+      audiencePrompt: document.getElementById('audience-prompt'),
+      danmuList: document.getElementById('danmu-list'),
+      danmuForm: document.getElementById('danmu-form'),
+      danmuInput: document.getElementById('danmu-input'),
+      decisionModal: document.getElementById('decision-modal'),
+      decisionPrompt: document.getElementById('decision-prompt'),
+      decisionOptions: document.getElementById('decision-options'),
+      decisionClose: document.getElementById('decision-close')
+    };
+
+    let storyData = null;
+    let narrativeBlocks = [];
+    let storyTitle = '心动的信号';
+    let currentIndex = 0;
+    let currentDialogueIndex = 0;
+    let voteCounts = { left: 0, right: 0 };
+    let lastEngagement = null;
+    let decisionHistoryKey = 'decisionHistory';
+    const AUTO_ADVANCE_DELAY = 5000;
+    let autoAdvanceTimer = null;
+    let lastRenderedDialogueKey = null;
+    let lastRenderedBlockIndex = null;
+
+    function resolveNarrativeBlocks(data) {
+      if (!data) return [];
+      if (Array.isArray(data.narrative_block)) return data.narrative_block;
+      const mf = data.model_facing_content;
+      if (mf && mf.display_chapter_one_script && Array.isArray(mf.display_chapter_one_script.narrative_block)) {
+        return mf.display_chapter_one_script.narrative_block;
+      }
+      if (data.display_fields && Array.isArray(data.display_fields.narrative_block)) {
+        return data.display_fields.narrative_block;
+      }
+      const nestedMf = data.display_fields && data.display_fields.model_facing_content;
+      if (nestedMf && nestedMf.display_chapter_one_script && Array.isArray(nestedMf.display_chapter_one_script.narrative_block)) {
+        return nestedMf.display_chapter_one_script.narrative_block;
+      }
+      return [];
+    }
+
+    function resolveStoryTitle(data) {
+      if (!data) return '心动的信号';
+      return (
+        data.Storyname ||
+        data.storyname ||
+        (data.display_fields && (data.display_fields.Storyname || data.display_fields.storyname)) ||
+        data.playname ||
+        '心动的信号'
+      );
+    }
+
+    function resolveStoryCover(data, blocks) {
+      if (!data) return null;
+      if (data.display_fields && data.display_fields.Storyimage) return data.display_fields.Storyimage;
+      if (data.storyImage) return data.storyImage;
+      if (Array.isArray(blocks) && blocks.length && blocks[0].background_image) return blocks[0].background_image;
+      return null;
+    }
+
+    function clearAutoAdvance() {
+      if (autoAdvanceTimer) {
+        clearTimeout(autoAdvanceTimer);
+        autoAdvanceTimer = null;
+      }
+    }
+
+    function scheduleAutoAdvance() {
+      clearAutoAdvance();
+      if (!storyData || !Array.isArray(narrativeBlocks)) return;
+      if (currentIndex >= narrativeBlocks.length) return;
+      const block = narrativeBlocks[currentIndex];
+      if (!block) return;
+      if (refs.decisionModal.classList.contains('active')) return;
+      autoAdvanceTimer = setTimeout(() => {
+        advanceNarrativeStep({ triggeredByAuto: true });
+      }, AUTO_ADVANCE_DELAY);
+    }
+
+    function userInteracted() {
+      scheduleAutoAdvance();
+    }
+
+    function advanceNarrativeStep({ triggeredByAuto = false } = {}) {
+      if (!storyData || !Array.isArray(narrativeBlocks)) return;
+      const blocks = narrativeBlocks;
+      if (currentIndex >= blocks.length) {
+        clearAutoAdvance();
+        return;
+      }
+
+      const dialogues = Array.isArray(blocks[currentIndex].dialogues) ? blocks[currentIndex].dialogues : [];
+      if (dialogues.length && currentDialogueIndex < dialogues.length - 1) {
+        currentDialogueIndex += 1;
+      } else {
+        currentIndex += 1;
+        currentDialogueIndex = 0;
+        lastRenderedBlockIndex = null;
+        lastRenderedDialogueKey = null;
+      }
+      renderCurrentState();
+    }
+
+    function resetDanmuInput() {
+      refs.danmuInput.textContent = '说点什么...';
+      refs.danmuInput.classList.remove('text-white');
+      refs.danmuInput.classList.add('text-white/70');
+    }
+
+    refs.danmuInput.addEventListener('focus', () => {
+      if (refs.danmuInput.textContent === '说点什么...') {
+        refs.danmuInput.textContent = '';
+        refs.danmuInput.classList.add('text-white');
+      }
+    });
+
+    refs.danmuForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const text = refs.danmuInput.textContent.trim();
+      if (!text) return;
+      appendDanmu(`观众 ${viewerId}: ${text}`);
+      resetDanmuInput();
+    });
+
+    function appendDanmu(text) {
+      const node = document.createElement('div');
+      node.className = 'rounded-full bg-white/12 px-3 py-2';
+      node.textContent = text;
+      refs.danmuList.appendChild(node);
+      refs.danmuList.scrollTop = refs.danmuList.scrollHeight;
+    }
+
+    async function fetchJSON(url, options) {
+      const res = await fetch(url, options);
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    }
+
+    function getStoryIdFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('story');
+    }
+
+    async function loadStory() {
+      const storyId = getStoryIdFromQuery();
+      try {
+        const endpoint = storyId ? `${API_BASE}/story/${encodeURIComponent(storyId)}` : `${API_BASE}/story`;
+        const data = await fetchJSON(endpoint);
+        storyData = data;
+        narrativeBlocks = resolveNarrativeBlocks(data);
+        currentIndex = 0;
+        voteCounts = { left: 0, right: 0 };
+        storyTitle = resolveStoryTitle(data);
+        refs.playTitle.textContent = storyTitle;
+        decisionHistoryKey = `decisionHistory:${storyTitle}`;
+        currentDialogueIndex = 0;
+        lastRenderedBlockIndex = null;
+        lastRenderedDialogueKey = null;
+        const cover = resolveStoryCover(data, narrativeBlocks);
+        if (cover) refs.storyImage.src = cover;
+        renderCurrentState();
+      } catch (error) {
+        refs.storyDialogues.innerHTML = `<p class="text-sm text-red-400">无法加载剧本：${error.message}</p>`;
+        console.error('Load story failed', error);
+      }
+    }
+
+    function renderCurrentState() {
+      clearAutoAdvance();
+      if (!storyData || !Array.isArray(narrativeBlocks)) {
+        refs.storyDialogues.innerHTML = '<p class="text-sm text-white/70">正在获取剧本内容...</p>';
+        refs.nextBtn.disabled = false;
+        refs.nextBtn.innerHTML = '<span>↻</span> 重试加载';
+        refs.nextBtn.onclick = () => {
+          userInteracted();
+          loadStory();
+        };
+        return;
+      }
+      const blocks = narrativeBlocks;
+
+      if (currentIndex >= blocks.length) {
+        refs.storyImage.src = refs.storyImage.src;
+        refs.storyMeta.textContent = `段落 ${blocks.length}/${blocks.length}`;
+        refs.storyDialogues.innerHTML = `
+            <div class="flex flex-col items-center justify-center gap-3 rounded-2xl bg-black/30 px-4 py-10">
+              <div class="h-10 w-10 animate-spin rounded-full border-4 border-white/20 border-t-white"></div>
+              <p class="text-sm text-white/80">票数计算中，请稍候...</p>
+            </div>`;
+        refs.progressTitle.textContent = '票数统计中';
+        refs.progressFill.style.width = '50%';
+        refs.voteLeft.textContent = '票数统计中';
+        refs.voteRight.textContent = '请稍候';
+        refs.voteOptions.innerHTML = '<p class="text-xs text-white/50">正在统计本场互动结果...</p>';
+        refs.audiencePrompt.textContent = '票数计算中';
+        refs.nextBtn.disabled = true;
+        refs.nextBtn.textContent = '票数计算中';
+        refs.decisionModal.classList.remove('active');
+        clearAutoAdvance();
+        return;
+      }
+
+      const block = blocks[currentIndex];
+      const isNewBlock = lastRenderedBlockIndex !== currentIndex;
+      const dialogues = Array.isArray(block.dialogues) ? block.dialogues : [];
+
+      if (isNewBlock) {
+        currentDialogueIndex = 0;
+      }
+
+      if (block.background_image && isNewBlock) {
+        refs.storyImage.src = block.background_image;
+      }
+
+      refs.storyMeta.textContent = `段落 ${currentIndex + 1}/${blocks.length}`;
+
+      if (currentDialogueIndex >= dialogues.length && dialogues.length) {
+        currentDialogueIndex = dialogues.length - 1;
+      }
+
+      let dialogueContent = '<p class="text-sm text-white/60">当前段落暂无台词</p>';
+      let currentDialogue = null;
+      if (dialogues.length) {
+        currentDialogue = dialogues[currentDialogueIndex] || null;
+        if (!currentDialogue) {
+          currentDialogueIndex = 0;
+          currentDialogue = dialogues[0];
+        }
+        dialogueContent = `<div class="rounded-2xl bg-black/40 px-3 py-2">
+              <p class="text-[11px] text-white/50">${currentDialogue.speaker || '角色'}</p>
+              <p class="text-sm leading-relaxed">${currentDialogue.text || ''}</p>
+            </div>`;
+      }
+      refs.storyDialogues.innerHTML = dialogueContent;
+
+      const dialogueKey = currentDialogue ? `${currentIndex}:${currentDialogueIndex}` : null;
+      if (dialogueKey && dialogueKey !== lastRenderedDialogueKey) {
+        appendDanmu(`${currentDialogue.speaker || '角色'}：${currentDialogue.text || ''}`);
+      }
+      lastRenderedDialogueKey = dialogueKey;
+
+      if (isNewBlock) {
+        if (block.audience_engagement_point) {
+          const ap = block.audience_engagement_point;
+          lastEngagement = ap;
+          refs.audiencePrompt.textContent = ap.prompt_to_audience || '观众互动';
+          refs.progressTitle.textContent = ap.prompt_to_audience || '观众互动';
+          const options = Array.isArray(ap.options) ? ap.options : [];
+          refs.voteOptions.innerHTML = options
+            .map(
+              (opt) => `<button data-engagement="${ap.engagement_id}" data-option="${opt.id}" class="flex w-full items-center justify-between rounded-xl bg-black/40 px-4 py-3 text-left hover:bg-black/60">
+                  <span>${opt.text}</span>
+                  <span class="text-xs text-white/40">投票</span>
+                </button>`
+            )
+            .join('');
+          if (options.length >= 2) {
+            refs.voteLeft.textContent = `${options[0].text} 0票`;
+            const rightLabel = options[1] ? options[1].text : '选项B';
+            refs.voteRight.textContent = `${rightLabel} 0票`;
+          } else {
+            refs.voteLeft.textContent = '左侧 0票';
+            refs.voteRight.textContent = '右侧 0票';
+          }
+        } else {
+          refs.audiencePrompt.textContent = '观众请稍候';
+          refs.progressTitle.textContent = '实时进度';
+          refs.voteLeft.textContent = '会 0票';
+          refs.voteRight.textContent = '不会 0票';
+          refs.voteOptions.innerHTML = '<p class="text-xs text-white/50">当前没有观众互动</p>';
+          lastEngagement = null;
+        }
+
+        if (block.decision_point) {
+          const dp = block.decision_point;
+          const history = JSON.parse(localStorage.getItem(decisionHistoryKey) || '{}');
+          if (!history[dp.decision_id]) {
+            refs.decisionPrompt.textContent = dp.prompt;
+            refs.decisionOptions.innerHTML = (dp.options || [])
+              .map(
+                (opt) => `<button data-decision="${dp.decision_id}" data-option="${opt.id}" class="w-full rounded-xl bg-white/10 px-4 py-3 text-left text-sm hover:bg-white/15">${opt.text}</button>`
+              )
+              .join('');
+            refs.decisionModal.classList.add('active');
+            clearAutoAdvance();
+          } else {
+            refs.decisionModal.classList.remove('active');
+          }
+        } else {
+          refs.decisionModal.classList.remove('active');
+        }
+      }
+
+      const hasMoreDialogues = dialogues.length && currentDialogueIndex < dialogues.length - 1;
+      const hasMoreBlocks = currentIndex < blocks.length - 1;
+      const hasAnyFuture = hasMoreDialogues || hasMoreBlocks;
+      refs.nextBtn.disabled = !hasAnyFuture;
+      refs.nextBtn.innerHTML = hasAnyFuture ? '<span>▶</span> 播放' : '票数计算中';
+
+      lastRenderedBlockIndex = currentIndex;
+
+      scheduleAutoAdvance();
+    }
+
+    refs.nextBtn.addEventListener('click', () => {
+      userInteracted();
+      advanceNarrativeStep();
+    });
+
+    refs.voteOptions.addEventListener('click', async (event) => {
+      const button = event.target.closest('button[data-engagement]');
+      if (!button || !lastEngagement) return;
+      const engagementId = button.dataset.engagement;
+      const optionId = button.dataset.option;
+      try {
+        userInteracted();
+        await fetchJSON(`${API_BASE}/audience-vote`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ engagementId, optionId, viewerId })
+        });
+        appendDanmu(`观众投票 → ${optionId}`);
+        if (!voteCounts[optionId]) voteCounts[optionId] = 0;
+        voteCounts[optionId] += 1;
+        updateVoteDisplay();
+      } catch (error) {
+        appendDanmu('投票失败：' + error.message);
+      }
+    });
+
+    function updateVoteDisplay() {
+      const total = Object.values(voteCounts).reduce((sum, val) => sum + (typeof val === 'number' ? val : 0), 0) || 1;
+      const leftVal = voteCounts.support_huafei || voteCounts.option_A || voteCounts.left || 0;
+      const rightVal = voteCounts.support_anlingrong || voteCounts.option_B || voteCounts.option_C || voteCounts.right || 0;
+      const leftRatio = Math.min(100, Math.round((leftVal / total) * 100));
+      refs.progressFill.style.width = `${leftRatio}%`;
+      refs.voteLeft.textContent = `左侧 ${leftVal}票`;
+      refs.voteRight.textContent = `右侧 ${total - leftVal}票`;
+    }
+
+    refs.decisionOptions.addEventListener('click', async (event) => {
+      const button = event.target.closest('button[data-decision]');
+      if (!button) return;
+      const decisionId = button.dataset.decision;
+      const optionId = button.dataset.option;
+      try {
+        userInteracted();
+        await fetchJSON(`${API_BASE}/decision`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ decisionId, optionId, playerId })
+        });
+        const history = JSON.parse(localStorage.getItem(decisionHistoryKey) || '{}');
+        history[decisionId] = { optionId, time: Date.now() };
+        localStorage.setItem(decisionHistoryKey, JSON.stringify(history));
+        appendDanmu(`玩家决策 → ${optionId}`);
+        refs.decisionModal.classList.remove('active');
+        scheduleAutoAdvance();
+      } catch (error) {
+        appendDanmu('决策提交失败：' + error.message);
+      }
+    });
+
+    refs.decisionClose.addEventListener('click', () => {
+      refs.decisionModal.classList.remove('active');
+      userInteracted();
+    });
+
+    loadStory();
+  </script>
+</body>
+
+</html>

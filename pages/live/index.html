@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>直播页 - AIKO</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/pages/live/styles.css" />
+</head>
+
+<body class="min-h-screen bg-slate-950 text-white">
+  <main class="mx-auto max-w-3xl px-4 py-12">
+    <a class="text-sm text-white/60 hover:text-white" href="../../index.html">← 返回导航</a>
+    <h1 class="mt-6 text-3xl font-semibold">直播页</h1>
+    <p class="mt-2 text-sm text-white/60">
+      设计稿节点：
+      <a class="text-indigo-300 underline-offset-4 hover:underline"
+        href="https://www.figma.com/design/sNBKXg43hxl5R3zfTAYdwz/AIKO?node-id=225-2653&m=dev"
+        target="_blank">225-2653</a>
+    </p>
+
+    <div class="phone-wrapper mt-8">
+      <div class="phone-scaler">
+        <div
+          class="phone-frame overflow-hidden rounded-[32px] border border-white/10 bg-black shadow-[0_25px_55px_rgba(0,0,0,0.7)]">
+          <div class="phone-canvas relative flex flex-col px-5">
+            <div class="flex items-center justify-between pt-4 text-[13px] text-white/70">
+              <span class="tracking-[0.25em]">9:41</span>
+              <img src="https://www.figma.com/api/mcp/asset/01702fc3-17b4-400d-88b6-3f85db9a5fd8" alt="系统状态"
+                class="h-4 w-auto opacity-80" loading="lazy" />
+            </div>
+            <div class="mt-6 flex items-center justify-between">
+              <button class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/80">
+                <span class="text-lg">←</span>
+              </button>
+              <div class="flex-1 text-center">
+                <h2 id="live-main-title" class="text-[24px] font-semibold tracking-wide">甄嬛娘娘团登上泰坦尼克</h2>
+              </div>
+              <button class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/80">
+                <span class="text-lg">⋯</span>
+              </button>
+            </div>
+            <p class="mt-2 text-center text-[11px] text-white/40">该数值由点击头像次数产生</p>
+            <div class="mt-4 flex gap-3 overflow-x-auto pb-2">
+              <div class="flex flex-col items-center gap-0.5">
+                <div class="relative h-12 w-12 rounded-full border-2 border-[#ff2d55]">
+                  <img src="https://www.figma.com/api/mcp/asset/39204d24-70f8-48b9-a3de-96e4ee4135ac" alt="观众"
+                    class="h-full w-full rounded-full object-cover" loading="lazy" />
+                  <span
+                    class="absolute -top-2 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#ff2d55] text-[10px] font-semibold">1</span>
+                </div>
+                <span class="text-[11px] text-white/70">213123</span>
+              </div>
+              <div class="flex flex-col items-center gap-0.5">
+                <div class="relative h-12 w-12 rounded-full border-2 border-white/25">
+                  <img src="https://www.figma.com/api/mcp/asset/f5203649-9a15-4d2b-b7bb-38a81430c8ad" alt="观众"
+                    class="h-full w-full rounded-full object-cover" loading="lazy" />
+                  <span
+                    class="absolute -top-2 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#ff9f0a] text-[10px] font-semibold">4</span>
+                </div>
+                <span class="text-[11px] text-white/70">45366</span>
+              </div>
+              <div class="flex flex-col items-center gap-0.5">
+                <div class="relative h-12 w-12 rounded-full border-2 border-white/25">
+                  <img src="https://www.figma.com/api/mcp/asset/74703ad7-4939-4177-bc72-894bd2893bc0" alt="观众"
+                    class="h-full w-full rounded-full object-cover" loading="lazy" />
+                  <span
+                    class="absolute -top-2 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#ff375f] text-[10px] font-semibold">5</span>
+                </div>
+                <span class="text-[11px] text-white/70">12334</span>
+              </div>
+              <div class="flex flex-col items-center gap-0.5">
+                <div class="relative h-12 w-12 rounded-full border-2 border-white/25">
+                  <img src="https://www.figma.com/api/mcp/asset/6ff7b7a7-7b4c-4bae-b659-a666de8b326f" alt="观众"
+                    class="h-full w-full rounded-full object-cover" loading="lazy" />
+                  <span
+                    class="absolute -top-2 right-0 flex h-5 w-5 items-centerjustify-center rounded-full bg-[#ff2d55] text-[10px] font-semibold">3</span>
+                </div>
+                <span class="text-[11px] text-white/70">12314</span>
+              </div>
+              <div class="flex flex-col items-center gap-0.5">
+                <div class="relative h-12 w-12 rounded-full border-2 border-white/25">
+                  <img src="https://www.figma.com/api/mcp/asset/7d5fb588-adf3-4486-8c38-3bfc38be901b" alt="观众"
+                    class="h-full w-full rounded-full object-cover" loading="lazy" />
+                  <span
+                    class="absolute -top-2 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#ff2d55] text-[10px] font-semibold">6</span>
+                </div>
+                <span class="text-[11px] text-white/70">2526</span>
+              </div>
+            </div>
+            <div id="live-status"
+              class="mt-6 space-y-3 rounded-[22px] border border-white/12 bg-white/5 p-4 text-sm text-white/70 shadow-inner">
+              <p id="live-status-text">正在等待所有玩家进入直播舞台并完成选择...</p>
+              <button id="live-force-start"
+                class="w-full rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white/80 transition hover:border-white/40 hover:bg-white/15">直接开始</button>
+            </div>
+            <div class="mt-4 rounded-[28px] bg-white/5">
+              <div id="live-video-container" class="relative h-[240px] sm:h-[260px] md:h-[280px] rounded-[28px]"
+                style="position: relative !important; isolation: isolate;">
+                <img id="live-background" class="absolute inset-0 h-full w-full rounded-[28px] object-cover z-0"
+                  src="https://www.figma.com/api/mcp/asset/a733fbff-74d6-4551-8f14-54abd322ce2f" alt="直播画面"
+                  loading="lazy" />
+                <div id="live-visual-effects" class="pointer-events-none absolute inset-0 rounded-[28px] z-10"></div>
+                <div class="pointer-events-none absolute left-5 top-5 z-20 flex gap-3">
+                  <span class="rounded-full bg-[#ff2d55] px-3 py-1 text-[11px] font-semibold text-white">直播</span>
+                  <span class="rounded-full bg-white/15 px-3 py-1 text-[11px] text-white/80">观众请稍候</span>
+                  <span class="rounded-full bg-[#fbbf24] px-3 py-1 text-[11px] text-black">吐真剂</span>
+                </div>
+                <div id="live-dialogue-overlay"
+                  class="pointer-events-none absolute bottom-0 left-0 right-0 z-50 flex items-end">
+                  <div id="live-dialogue-player"
+                    class="pointer-events-auto w-full h-24 rounded-t-3xl bg-black/85 px-5 py-3 text-white shadow-[0_-8px_32px_rgba(0,0,0,0.6)] backdrop-blur-xl flex flex-col"
+                    style="display: none;">
+                    <span id="live-dialogue-speaker"
+                      class="block text-[10px] uppercase tracking-wide text-white/60 mb-1"></span>
+                    <div id="live-dialogue-text-wrapper" class="flex-1 overflow-y-auto pr-1 scrollbar-thin">
+                      <p id="live-dialogue-text"
+                        class="text-[12px] leading-[1.5] text-white/95 whitespace-pre-wrap text-left"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 rounded-3xl bg-white/5 p-3">
+              <div class="flex items-start justify-between">
+                <div>
+                  <p class="text-[10px] text-white/50">观众投票</p>
+                  <p id="live-poll-title" class="mt-0.5 text-[13px] font-semibold">投票未开始</p>
+                </div>
+                <p class="text-[10px] text-white/60">发起人：乙游之主</p>
+              </div>
+              <p id="live-poll-prompt" class="mt-2 text-[11px] text-white/60">参与投票即可影响剧情走向</p>
+              <div id="live-poll-bars" class="mt-3 grid grid-cols-2 gap-2 text-[11px] text-white/70">
+                <button data-option="yes"
+                  class="rounded-2xl border border-white/12 bg-white/6 p-2 text-left transition hover:border-white/40 hover:bg-white/10">
+                  <div class="flex items-center justify-between">
+                    <span id="live-poll-yes-text">会</span>
+                    <span id="live-poll-yes-label">50%</span>
+                  </div>
+                  <div class="mt-1.5 h-1.5 w-full rounded-full bg-white/12">
+                    <div id="live-poll-yes" class="h-1.5 rounded-full bg-[#ff2d55]" style="width:50%"></div>
+                  </div>
+                </button>
+                <button data-option="no"
+                  class="rounded-2xl border border-white/12 bg-white/6 p-2 text-left transition hover:border-white/40 hover:bg-white/10">
+                  <div class="flex items-center justify-between">
+                    <span id="live-poll-no-text">不会</span>
+                    <span id="live-poll-no-label">50%</span>
+                  </div>
+                  <div class="mt-1.5 h-1.5 w-full rounded-full bg-white/12">
+                    <div id="live-poll-no" class="h-1.5 rounded-full bg-[#6366f1]" style="width:50%"></div>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div id="live-barrage" class="mt-4 h-32 overflow-y-auto space-y-2 pr-2 text-xs leading-5 text-white/75">
+            </div>
+            <form id="live-barrage-form" class="mt-auto mb-5 flex items-center gap-3">
+              <input id="live-barrage-input" type="text" autocomplete="off"
+                class="flex-1 rounded-full border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-white/40 focus:outline-none"
+                placeholder="说点什么..." />
+              <button type="submit"
+                class="rounded-full bg-[#ffcc00] px-5 py-2 text-sm font-semibold text-black shadow">发送</button>
+            </form>
+            <div class="mb-2 h-1.5 w-36 self-center rounded-full bg-white/30"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="/assets/app.js"></script>
+  <script type="module" src="/pages/live/live.js"></script>
+  <script>
+    window.__PROXY_ORIGIN__ = 'http://localhost:5176';
+  </script>
+</body>
+
+</html>

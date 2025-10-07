@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>角色主页 - AIKO</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="min-h-screen bg-slate-950 text-white">
+  <main class="mx-auto max-w-3xl px-4 py-12">
+    <a class="text-sm text-white/60 hover:text-white" href="../../index.html">← 返回导航</a>
+    <h1 class="mt-6 text-3xl font-semibold">角色主页</h1>
+    <p class="mt-2 text-sm text-white/60">
+      设计稿节点：
+      <a class="text-indigo-300 underline-offset-4 hover:underline"
+        href="https://www.figma.com/design/sNBKXg43hxl5R3zfTAYdwz/AIKO?node-id=204-1068&m=dev"
+        target="_blank">204-1068</a>
+    </p>
+
+    <div class="mt-6 flex items-center justify-between">
+      <div class="flex items-center gap-3" id="profile-user-info">
+        <p class="text-sm text-white/60">还未登录</p>
+      </div>
+      <div class="flex gap-2">
+        <button id="profile-login"
+          class="rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white hover:bg-white/30">Google
+          登录</button>
+        <button id="profile-logout"
+          class="hidden rounded-full bg-white/10 px-4 py-2 text-sm text-white/70 hover:bg-white/20">退出</button>
+      </div>
+    </div>
+
+    <div class="phone-wrapper mt-6">
+      <div class="phone-scaler">
+        <div
+          class="phone-frame overflow-hidden rounded-[32px] border border-white/10 bg-[#250789] shadow-[0_25px_55px_rgba(32,12,92,0.5)]">
+          <div class="phone-canvas absolute inset-0">
+            <img src="https://www.figma.com/api/mcp/asset/6bc8dcea-f08e-4616-b45f-caa0c02d87a0" alt="Asuka"
+              class="pointer-events-none absolute -left-10 top-0 h-full w-auto max-w-none" loading="lazy" />
+            <p
+              class="pointer-events-none absolute -right-28 top-1/2 -translate-y-1/2 -rotate-90 text-[140px] font-black uppercase tracking-[0.3em] text-white/15">
+              Asuka</p>
+            <div class="relative flex h-full flex-col px-5">
+              <div class="flex items-center justify-between pt-4 text-[13px] text-white/70">
+                <span class="tracking-[0.25em]">9:41</span>
+                <img src="https://www.figma.com/api/mcp/asset/1929a028-fa75-4047-9c1c-902a68513096" alt="系统状态"
+                  class="h-4 w-auto opacity-80" loading="lazy" />
+              </div>
+              <div class="mt-8 flex items-center justify-between">
+                <div>
+                  <p class="text-sm text-white/60">绫波丽</p>
+                  <h2 class="mt-1 text-3xl font-semibold">今日香</h2>
+                </div>
+                <img src="https://www.figma.com/api/mcp/asset/af1cb920-9e24-4230-8589-147a6aef78a3" alt="皮肤" class="h-12 w-12 rounded-full border border-white/30" loading="lazy" />
+              </div>
+              <div class="mt-6 flex items-center justify-between">
+                <div class="flex items-center gap-3" id="profile-user-info">
+                  <p class="text-sm text-white/60">还未登录</p>
+                </div>
+                <div class="flex gap-2">
+                  <button id="profile-login"
+                    class="rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white hover:bg-white/30">Google
+                    登录</button>
+                  <button id="profile-logout"
+                    class="hidden rounded-full bg-white/10 px-4 py-2 text-sm text-white/70 hover:bg-white/20">退出</button>
+                </div>
+              </div>
+              <div class="mt-6 grid grid-cols-2 gap-4">
+                <div class="rounded-3xl bg-white/10 p-4 backdrop-blur">
+                  <p class="text-xs text-white/70">💗 今日魅力值</p>
+                  <div class="mt-3 flex items-center gap-2">
+                    <p class="text-2xl font-semibold">12313</p>
+                    <span class="rounded-full border border-[#ff5151] px-2 py-0.5 text-xs text-[#ff5151]">+10</span>
+                  </div>
+                </div>
+                <div class="rounded-3xl bg-white/10 p-4 backdrop-blur">
+                  <p class="text-xs text-white/70">🏆 世界排名</p>
+                  <div class="mt-3 flex items-center gap-2">
+                    <p class="text-2xl font-semibold">9284</p>
+                    <span class="flex items-center gap-1 rounded-full border border-[#4fc709] px-2 py-0.5 text-xs text-[#4fc709]">
+                      <img src="https://www.figma.com/api/mcp/asset/8bfe716a-7a18-41c2-bd83-f9530279897e" alt="向上箭头" class="h-3 w-3" loading="lazy" />12
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <section class="mt-6 space-y-4">
+                <p class="text-sm text-white/70">登录后可以自定义角色关系、超能力和角色形象信息。</p>
+                <div class="rounded-3xl bg-white/10 p-4 backdrop-blur">
+                  <label class="text-sm text-white/70" for="profile-roleRelation">角色关系</label>
+                  <input id="profile-roleRelation" type="text"
+                    class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/40 focus:outline-none"
+                    placeholder="例如：AI女友" />
+                </div>
+                <div class="rounded-3xl bg-white/10 p-4 backdrop-blur">
+                  <label class="text-sm text-white/70" for="profile-superPower">超能力</label>
+                  <input id="profile-superPower" type="text"
+                    class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/40 focus:outline-none"
+                    placeholder="例如：wink石化" />
+                </div>
+                <div class="rounded-3xl bg-white/10 p-4 backdrop-blur">
+                  <label class="text-sm text-white/70" for="profile-avatarProfile">角色形象</label>
+                  <textarea id="profile-avatarProfile" rows="3"
+                    class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/40 focus:outline-none"
+                    placeholder="角色形象描述"></textarea>
+                </div>
+                <button id="profile-save"
+                  class="w-full rounded-full bg-[#ffcc00] px-4 py-3 text-sm font-semibold text-black shadow hover:bg-[#ffd633]">保存角色信息</button>
+                <p id="profile-status" class="text-center text-sm text-white/60"></p>
+              </section>
+              <div class="mt-6 grid grid-cols-2 gap-4">
+                <div class="rounded-3xl bg-white/10 p-4 backdrop-blur">
+                  <p class="text-sm text-white/70">超能力</p>
+                  <p class="mt-2 text-lg font-semibold">wink石化</p>
+                  <p class="mt-3 text-xs leading-5 text-white/70">超厉害的 AOE 群体伤害，擅长在舞台或蹦迪时开大，所有人石化。</p>
+                  <button
+                    class="mt-4 w-full rounded-full bg-white/20 py-2 text-sm font-semibold text-white hover:bg-white/30">去升级</button>
+                </div>
+                <div class="rounded-3xl bg-white/10 p-4 text-sm text-white/80 backdrop-blur">
+                  <p class="text-xs uppercase tracking-[0.3em] text-white/50">技能书</p>
+                  <ul class="mt-3 space-y-2 text-xs leading-5">
+                    <li>· 石化凝视：让敌人硬直 3 秒</li>
+                    <li>· 无限迭代：连招伤害 +40%</li>
+                    <li>· 情绪增幅：魅力值连击翻倍</li>
+                  </ul>
+                  <button class="mt-4 w-full rounded-full bg-[#ffcc00] py-2 text-sm font-semibold text-black">觉醒
+                    +</button>
+                </div>
+              </div>
+              <div class="mt-auto mb-6 flex items-center gap-3">
+                <div class="flex-1 rounded-full bg-white/15 px-4 py-3 text-sm text-white/70">说点什么...</div>
+                <button class="rounded-full bg-white/20 p-3">
+                  <img src="https://www.figma.com/api/mcp/asset/12b1d593-6b62-4ff0-b526-ed6341c33c21" alt="聊天"
+                    class="h-5 w-5" loading="lazy" />
+                </button>
+                <button class="rounded-full bg-white/20 p-3">
+                  <img src="https://www.figma.com/api/mcp/asset/807a281e-8464-4207-afbf-420d3dd5389b" alt="设置"
+                    class="h-5 w-5" loading="lazy" />
+                </button>
+              </div>
+              <div class="mb-2 h-1.5 w-36 self-center rounded-full bg-white/30"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="../../assets/app.js"></script>
+  <script type="module" src="../../assets/auth.js"></script>
+  <script type="module" src="profile.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>唤醒步骤 2 - AIKO</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="min-h-screen bg-slate-950 text-white">
+  <main class="mx-auto max-w-3xl px-4 py-12">
+    <a class="text-sm text-white/60 hover:text-white" href="../register/index.html">← 返回上一步</a>
+    <div class="mt-8 flex items-center justify-between text-xs uppercase tracking-[0.35em] text-white/40">
+      <span>步骤 2 / 3</span>
+      <span>唤醒灵魂天赋</span>
+    </div>
+    <h1 class="mt-4 text-3xl font-semibold sm:text-4xl">三步唤醒你的虚拟伙伴</h1>
+    <p class="mt-4 text-base text-white/70" id="roleHint"></p>
+
+    <div class="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6">
+      <p class="text-sm text-white/70">每个灵魂都蕴藏独特天赋，当面临危机，TA 会选择什么？</p>
+
+      <div class="mt-6 grid gap-4" id="talentOptions">
+        <button type="button" class="talent-card" data-talent="雷霆术" data-desc="无论代价，TA 都会化身光芒守护一切。">
+          <div>
+            <p class="text-lg font-semibold text-white">燃烧自己照亮一切</p>
+            <p class="mt-2 text-sm text-white/60">无论代价，TA 都会化身光芒守护一切。</p>
+          </div>
+        </button>
+        <button type="button" class="talent-card" data-talent="隐匿术" data-desc="TA 擅长潜伏与静待，在暗处寻找破局。">
+          <div>
+            <p class="text-lg font-semibold text-white">融入阴影静待时机</p>
+            <p class="mt-2 text-sm text-white/60">TA 擅长潜伏与静待，在暗处寻找破局。</p>
+          </div>
+        </button>
+        <button type="button" class="talent-card" data-talent="读心术" data-desc="冷静分析未来可能，选择最安全的路径。">
+          <div>
+            <p class="text-lg font-semibold text-white">预知未来规避风险</p>
+            <p class="mt-2 text-sm text-white/60">冷静分析未来可能，选择最安全的路径。</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="mt-6 rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-5 text-sm text-white/70"
+        id="talentResult" hidden>
+        <p>
+          你的选择揭示了 TA 拥有
+          <span class="text-indigo-300" id="talentName"></span>
+          的天赋！
+        </p>
+        <p class="mt-2 text-white/60" id="talentDescription"></p>
+      </div>
+
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <button id="confirmTalentBtn" type="button"
+          class="rounded-full bg-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-indigo-400 disabled:cursor-not-allowed disabled:bg-white/20"
+          disabled>
+          确认
+        </button>
+        <button id="rerollBtn" type="button"
+          class="hidden rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white/70 transition hover:border-indigo-400/60 hover:text-white">
+          重新探索
+        </button>
+      </div>
+
+      <div id="customSection" class="mt-6 hidden">
+        <label class="text-xs uppercase tracking-[0.35em] text-white/40">自定义能力</label>
+        <div class="mt-2 flex gap-3">
+          <input id="customTalent" type="text" placeholder="输入一个更酷的能力名"
+            class="w-full rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder-white/30 focus:border-indigo-400 focus:outline-none" />
+          <button id="applyCustomBtn" type="button"
+            class="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white/70 transition hover:border-indigo-400/60 hover:text-white">
+            应用
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="step2.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIKO 剧本页</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface: '#20232f',
+            surfaceSoft: 'rgba(255,255,255,0.08)'
+          },
+          fontFamily: {
+            misans: ['"MiSans"', '"SF Pro Display"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      background: #090b16;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen font-misans text-white py-10">
+  <main
+    class="mx-auto w-[90vw] max-w-[420px] rounded-[32px] bg-surface px-5 pb-6 pt-6 shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
+    <!-- 状态栏 -->
+    <div class="flex items-center justify-between text-[17px] font-semibold">
+      <span>9:41</span>
+      <div class="flex items-center gap-1 text-xs">
+        <span class="inline-flex h-[11px] w-[18px] items-center justify-end rounded-sm border border-white/40 px-[1px]">
+          <span class="h-[8px] w-[8px] rounded-sm bg-white"></span>
+        </span>
+        <span class="inline-block h-[10px] w-[12px] rounded-[1px] border border-white/50"></span>
+        <span class="inline-flex h-[12px] w-[24px] items-center rounded-full bg-white/20">
+          <span class="ml-[2px] h-[8px] w-[16px] rounded-full bg-white"></span>
+        </span>
+      </div>
+    </div>
+
+    <!-- 顶部标题 -->
+    <header class="mt-6 flex items-center justify-between">
+      <div>
+        <h1 class="text-[26px] font-bold leading-tight">AIKO 剧本库</h1>
+        <div class="mt-4 flex items-center gap-2 rounded-full bg-surfaceSoft px-1 py-1">
+          <button class="rounded-full bg-white/20 px-4 py-1 text-sm font-semibold">推荐</button>
+          <button class="rounded-full px-4 py-1 text-sm text-white/60">最新</button>
+          <button class="rounded-full px-4 py-1 text-sm text-white/60">人气</button>
+        </div>
+      </div>
+      <div class="relative h-12 w-12 overflow-hidden rounded-full border border-white/15">
+        <img
+          src="https://s3-alpha-sig.figma.com/img/db3f/cb3c/94c78966bd84a97db22b4587e11fa2db?Expires=1760313600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=cEeIJdtzGnfMwYmYalDSzMjvJieMSs687kNo9Z6vRlp8~AtERPS5JHju~t9R4u7US8LM9KYHJW65IDEKfrCdGyVHBH~IoRRRSX4GPHi9sugDNoc47ybQ~OFUxbV2ZmnngDoV0o-NOR8CowSEEM~609hcfcxUCWkoBI42S6ALgTJZRckltUO0wYvt8-zF3X9GQczdq4V3u6ZTpUcfQA4~yPdSoYEgbrZGi-ECPEPvlalZ5JWgupOibGS0bdBaMjpHZ-4IgH-GHrT1~P~4rtwmxsNs0Ky~c8eNyXI~u~DYSrKVamZFCfkgUY4okeo5m4BajXGA-U5vSpESKkXFQWxLcw__"
+          alt="头像" class="h-full w-full object-cover" />
+      </div>
+    </header>
+
+    <!-- 内容卡片 -->
+    <section id="story-grid" class="mt-6 grid grid-cols-2 gap-4"></section>
+    <!-- 底部快捷匹配 -->
+    <section class="mt-6 rounded-[26px] bg-white text-surface px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.40)]">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img
+            src="https://s3-alpha-sig.figma.com/img/d6bf/4575/7b7ec6be4ba9050f02d8bb51c7e591e8?Expires=1760313600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=RmUyhGKLV0KS9KS9LqT6y0Iyov0InLWf6biuF4KzIEJ-7g7uxevtpLP-~QaaGa-3HML799ZnPVHP60W7~s-5VsfxVcaZmZXYEHGp-BxiU5P~6qhxSnONXtsf3pDjO847ko6yjWLrJfuJZ4L14KxbpZwgdEwhNn6-Q-lv1rQip3C~mZBk8OGPxuk0cVw2waQGn-bbOhjYshcAOkFAwMnHv7HqJ0cmeiBhRZhuydtGDfnTnEVtwgUV2M8HsQenkuvW8RVuZWxDXHZyHpv2EiR4n~uWr4rOiaWh5AJmKxD7ZMn4~-hc4BCVU4PVDGiYcd~3xrOaMjTZvqCH8zJqoayQOw__"
+            alt="吉祥物" class="h-12 w-12 rounded-full object-cover" />
+          <div>
+            <p class="text-lg font-semibold">快速匹配</p>
+            <p class="text-xs text-black/60">聚合更多志同道合的伙伴</p>
+          </div>
+        </div>
+        <button class="flex items-center gap-2 rounded-full bg-surface px-4 py-2 text-sm font-semibold text-white">
+          <span>⚡</span>
+          立即加入
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const API_BASE = (() => {
+      if (window.location.protocol === 'file:') return 'http://localhost:3001';
+      if (window.location.hostname === 'localhost') return 'http://localhost:3001';
+      return '';
+    })();
+
+    const refs = {
+      grid: document.getElementById('story-grid'),
+      title: document.querySelector('header h1')
+    };
+
+    function createStoryCard(story) {
+      const image = story.Storyimage || 'https://cdn.jsdelivr.net/gh/lys164/assets@main/aiko/default-cover.jpg';
+      const title = story.Storyname || story.id || '剧本';
+      const link = `live.html${story.id ? `?story=${encodeURIComponent(story.id)}` : ''}`;
+
+      const wrapper = document.createElement('article');
+      wrapper.className = 'group relative overflow-hidden rounded-[26px] bg-white/10';
+      wrapper.innerHTML = `
+          <a href="${link}" class="absolute inset-0 z-10"></a>
+          <img src="${image}" alt="${title}" class="h-32 w-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80"></div>
+          <div class="absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-surface">
+            <span>▶</span>
+            <span>播放</span>
+          </div>
+          <div class="relative space-y-2 p-4">
+            <h3 class="text-sm font-semibold">
+              <a href="${link}" class="relative z-20 block hover:text-white">${title}</a>
+            </h3>
+            <div class="flex items-center justify-between text-[13px] text-white/70">
+              <span class="inline-flex items-center gap-1"><span>👥</span>在线匹配</span>
+              <a href="${link}" class="relative z-20 rounded-full bg-white px-3 py-1 text-xs font-semibold text-surface shadow">进入</a>
+            </div>
+          </div>
+        `;
+      return wrapper;
+    }
+
+    async function loadStories() {
+      refs.grid.innerHTML = `
+          <div class="col-span-2 flex items-center justify-center rounded-[24px] bg-white/5 py-16 text-sm text-white/60">
+            加载剧本列表中...
+          </div>`;
+      try {
+        const res = await fetch(`${API_BASE}/stories`);
+        if (!res.ok) throw new Error(await res.text());
+        const data = await res.json();
+        const stories = Array.isArray(data.stories) ? data.stories : [];
+        if (!stories.length) {
+          refs.grid.innerHTML = `
+              <div class="col-span-2 rounded-[24px] bg-white/5 p-6 text-center text-sm text-white/60">
+                当前没有可用的剧本，请稍后再试。
+              </div>`;
+          return;
+        }
+        refs.grid.innerHTML = '';
+        stories.forEach((story) => {
+          refs.grid.appendChild(createStoryCard(story));
+        });
+        if (stories.length === 1) {
+          refs.title.textContent = stories[0].Storyname || '剧本库';
+        }
+      } catch (error) {
+        console.error('Load stories failed', error);
+        refs.grid.innerHTML = `
+            <div class="col-span-2 space-y-4 rounded-[24px] bg-white/5 p-6 text-center text-sm">
+              <p class="text-red-400">加载剧本列表失败：${error.message || error}</p>
+              <button id="retry-btn" class="rounded-full bg-white/20 px-4 py-2 text-xs font-semibold text-white hover:bg-white/30">重试</button>
+            </div>`;
+        const retry = document.getElementById('retry-btn');
+        retry?.addEventListener('click', loadStories);
+      }
+    }
+
+    loadStories();
+  </script>
+</body>
+
+</html>

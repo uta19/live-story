@@ -1,0 +1,48 @@
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: "MiSans", "SF Pro", "Noto Sans SC", system-ui, sans-serif;
+  background: radial-gradient(circle at top, #111827, #020617 68%);
+}
+
+.phone-wrapper {
+  width: 100%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.phone-scaler {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  transform-origin: top left;
+  transform: scale(var(--phone-scale, 1));
+}
+
+.phone-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.phone-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  main {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4rem;
+  }
+
+  main>section {
+    margin-bottom: 0;
+  }
+}

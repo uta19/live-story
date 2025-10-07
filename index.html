@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIKO 移动界面合集</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js" defer></script>
+</head>
+
+<body class="min-h-screen text-white">
+  <header class="mx-auto max-w-6xl px-4 py-12 text-center lg:text-left">
+    <p class="text-sm uppercase tracking-[0.45em] text-white/40">AIKO UI Suite</p>
+    <h1 class="mt-3 text-4xl font-semibold tracking-tight lg:text-5xl">
+      六大移动页面实时还原
+    </h1>
+    <p class="mt-4 text-base text-white/70 lg:max-w-2xl">
+      基于 Figma 设计稿节点构建，使用 Tailwind CDN 与 Apache ECharts 5 CDN。
+      针对不同分辨率添加响应式约束，手机视图默认以 390 × 844 为基准。
+    </p>
+    <nav class="mt-8 flex flex-wrap justify-center gap-3 text-sm text-white/70 lg:justify-start">
+      <a class="rounded-full border border-white/15 px-4 py-2 hover:border-white/40"
+        href="pages/register/index.html">注册页</a>
+      <a class="rounded-full border border-white/15 px-4 py-2 hover:border-white/40"
+        href="pages/register-success/index.html">注册成功</a>
+      <a class="rounded-full border border-white/15 px-4 py-2 hover:border-white/40"
+        href="pages/lobby/index.html">大厅页</a>
+      <a class="rounded-full border border-white/15 px-4 py-2 hover:border-white/40"
+        href="pages/script/index.html">剧本页</a>
+      <a class="rounded-full border border-white/15 px-4 py-2 hover:border-white/40"
+        href="pages/live/index.html">直播页</a>
+      <a class="rounded-full border border-white/15 px-4 py-2 hover:border-white/40"
+        href="pages/profile/index.html">角色主页</a>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-4xl px-4 pb-14 text-left">
+    <section class="rounded-3xl bg-white/5 p-8 shadow-lg">
+      <h2 class="text-xl font-semibold text-white">页面入口</h2>
+      <p class="mt-3 text-sm text-white/70">
+        每个页面已经拆分为独立的 HTML、JS、CSS 文件。点击下方链接可以直接打开对应页面文件，便于后续接入后端逻辑或部署。
+      </p>
+      <ul class="mt-6 space-y-3 text-sm text-white/75">
+        <li><a class="text-indigo-300 underline-offset-4 hover:underline" href="pages/register/index.html">注册页</a></li>
+        <li><a class="text-indigo-300 underline-offset-4 hover:underline"
+            href="pages/register-success/index.html">注册成功页</a></li>
+        <li><a class="text-indigo-300 underline-offset-4 hover:underline" href="pages/lobby/index.html">大厅页</a></li>
+        <li><a class="text-indigo-300 underline-offset-4 hover:underline" href="pages/script/index.html">剧本页</a></li>
+        <li><a class="text-indigo-300 underline-offset-4 hover:underline" href="pages/live/index.html">直播页</a></li>
+        <li><a class="text-indigo-300 underline-offset-4 hover:underline" href="pages/profile/index.html">角色主页</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 py-6 text-center text-sm text-white/60">
+    © 2025 AIKO Demo • Tailwind CSS & Apache ECharts 5 构建
+  </footer>
+
+  <script src="assets/app.js" type="module" defer></script>
+</body>
+
+</html>
