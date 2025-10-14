@@ -2,10 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const path = require('path');
 
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
+
+// 提供静态文件服务（前端文件）
+app.use(express.static(path.join(__dirname, '../')));
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
+app.use('/pages', express.static(path.join(__dirname, '../pages')));
 
 const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
 
@@ -120,7 +126,18 @@ app.post('/api/seedream', async (req, res) => {
     }
 });
 
+// 根路径返回首页
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../index.html'));
+});
+
+// 处理所有HTML页面路由
+app.get('*.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', req.path));
+});
+
 const PORT = process.env.PORT || 5176;
 app.listen(PORT, () => {
     console.log(`[server] Proxy server running at http://localhost:${PORT}`);
+    console.log(`[server] Serving static files from: ${path.join(__dirname, '../')}`);
 });
