@@ -137,7 +137,10 @@ app.get('*.html', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5176;
-app.listen(PORT, () => {
-    console.log(`[server] Proxy server running at http://localhost:${PORT}`);
+const HOST = '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
+    console.log(`[server] Proxy server running on ${HOST}:${PORT}`);
     console.log(`[server] Serving static files from: ${path.join(__dirname, '../')}`);
+    console.log(`[server] Environment: ${process.env.NODE_ENV || 'development'}`);
 });
