@@ -3,6 +3,13 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const path = require('path');
+const multer = require('multer');
+
+// 配置文件上传
+const upload = multer({ 
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 10 * 1024 * 1024 } // 10MB
+});
 
 const app = express();
 app.use(cors());
@@ -121,6 +128,68 @@ app.post('/api/seedream', async (req, res) => {
         });
         res.status(error.response?.status || 500).json({
             message: 'Seedream proxy failed',
+            error: error.response?.data || error.message
+        });
+    }
+});
+
+// 处理图片生成请求（用于注册流程）
+app.post('/api/generate-image', upload.single('image'), async (req, res) => {
+    try {
+        const { role, talent, talentDesc } = req.body || {};
+        
+        if (!role || !talent || !talentDesc) {
+            return res.status(400).json({ 
+                message: 'role, talent, and talentDesc are required' 
+            });
+        }
+
+        // 构建 prompt
+        const prompt = `角色：${role}，天赋：${talent}，描述：${talentDesc}`;
+        
+        console.info('[server] 生成角色图片', {
+            role,
+            talent,
+            promptLength: prompt.length
+        });
+
+        // 调用 Seedream API
+        const payload = {
+            model: 'doubao-seedream-4-0-250828',
+            prompt,
+            response_format: 'url',
+            size: '2K',
+            watermark: true,
+            sequential_image_generation: 'auto'
+        };
+
+        const response = await axios.post(SEEDREAM_ENDPOINT, payload, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${SEEDREAM_API_KEY}`
+            },
+            timeout: 60000
+        });
+
+        const imageUrl = response.data?.data?.[0]?.url || null;
+        
+        if (!imageUrl) {
+            throw new Error('No image URL returned from API');
+        }
+
+        res.json({ 
+            imageUrls: [imageUrl],
+            imageUrl 
+        });
+    } catch (error) {
+        console.error('[server] 图片生成失败', {
+            status: error.response?.status,
+            data: error.response?.data,
+            message: error.message,
+            code: error.code
+        });
+        res.status(error.response?.status || 500).json({
+            message: 'Image generation failed',
             error: error.response?.data || error.message
         });
     }

@@ -55,7 +55,8 @@ submitBtn?.addEventListener('click', async () => {
         formData.append('talentDesc', talentDesc);
         formData.append('image', selectedFile, selectedFile.name);
 
-        const response = await fetch('http://localhost:3001/api/generate', {
+        // 使用相对路径，自动适配当前域名
+        const response = await fetch('/api/generate-image', {
             method: 'POST',
             body: formData,
         });
