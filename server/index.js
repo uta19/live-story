@@ -131,8 +131,8 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-// 处理所有HTML页面路由
-app.get('*.html', (req, res) => {
+// 处理所有HTML页面路由（使用正则表达式）
+app.get(/.*\.html$/, (req, res) => {
     res.sendFile(path.join(__dirname, '..', req.path));
 });
 
