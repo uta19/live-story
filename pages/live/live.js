@@ -46,7 +46,7 @@ function applyTemplate(template, values) {
   });
 }
 
-const DEFAULT_BACKGROUND = 'https://www.figma.com/api/mcp/asset/a733fbff-74d6-4551-8f14-54abd322ce2f';
+const DEFAULT_BACKGROUND = '/api/proxy-image?url=https%3A%2F%2Fwww.figma.com%2Fapi%2Fmcp%2Fasset%2Fa733fbff-74d6-4551-8f14-54abd322ce2f';
 const DIALOGUE_DELAY = 1100;
 const DIALOGUE_AUTO_ADVANCE_MS = 6000;
 
@@ -348,7 +348,7 @@ function updatePollBars(yes = 50, no = 50) {
 
 function clearNarrative() {
   if (backgroundImage) {
-    backgroundImage.src = 'https://www.figma.com/api/mcp/asset/a733fbff-74d6-4551-8f14-54abd322ce2f';
+    backgroundImage.src = '/api/proxy-image?url=https%3A%2F%2Fwww.figma.com%2Fapi%2Fmcp%2Fasset%2Fa733fbff-74d6-4551-8f14-54abd322ce2f';
   }
   if (visualEffectsLayer) visualEffectsLayer.innerHTML = '';
   if (dialoguesContainer) dialoguesContainer.innerHTML = '';

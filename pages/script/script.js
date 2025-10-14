@@ -43,7 +43,7 @@ function setUserAvatar(url) {
 
 function setStageAvatar(url) {
   if (!stageAvatarImg) return;
-  stageAvatarImg.src = url || 'https://www.figma.com/api/mcp/asset/1a013bd4-eeb6-498c-a688-a3f811a10e88';
+  stageAvatarImg.src = url || '/api/proxy-image?url=https%3A%2F%2Fwww.figma.com%2Fapi%2Fmcp%2Fasset%2F1a013bd4-eeb6-498c-a688-a3f811a10e88';
 }
 
 function showMatchedState() {

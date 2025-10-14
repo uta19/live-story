@@ -39,6 +39,47 @@ if (!SEEDREAM_ENDPOINT) {
     console.warn('[server] 未设置 SEEDREAM_ENDPOINT 环境变量');
 }
 
+// 图片代理接口 - 用于转发 Figma 图片请求
+app.get('/api/proxy-image', async (req, res) => {
+    try {
+        const { url } = req.query;
+        
+        if (!url) {
+            return res.status(400).send('Missing url parameter');
+        }
+        
+        // 验证是否为 Figma 图片 URL
+        if (!url.startsWith('https://www.figma.com/api/mcp/asset/')) {
+            return res.status(403).send('Only Figma images are allowed');
+        }
+        
+        console.log(`[server] 代理图片: ${url.substring(0, 80)}...`);
+        
+        // 发起请求获取图片
+        const response = await axios.get(url, {
+            responseType: 'arraybuffer',
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+                'Referer': 'https://www.figma.com/',
+            },
+            timeout: 10000
+        });
+        
+        // 设置响应头
+        const contentType = response.headers['content-type'] || 'image/png';
+        res.set('Content-Type', contentType);
+        res.set('Cache-Control', 'public, max-age=86400'); // 缓存24小时
+        
+        // 返回图片数据
+        res.send(response.data);
+        
+    } catch (error) {
+        console.error('[server] 图片代理失败:', error.message);
+        res.status(error.response?.status || 500).send('Failed to proxy image');
+    }
+});
+
 app.post('/api/gemini', async (req, res) => {
     try {
         const { systemPrompt = '', input = '' } = req.body || {};
