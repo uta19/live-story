@@ -185,12 +185,17 @@ app.post('/api/generate-image', upload.single('image'), async (req, res) => {
             });
         }
 
-        // 构建 prompt
-        const prompt = `角色：${role}，天赋：${talent}，描述：${talentDesc}`;
+        // 构建 prompt - 使用专业的 Chibi 风格提示词
+        const basePrompt = `A cute chibi anime full body character with extremely thick black border, solid flat colors without any shading or gradients, large head small body (1:1.5 ratio), vector art style, kawaii aesthetic, simple geometric shapes, transparent background, high contrast, vibrant colors, simplified details, clean design, no texture, no complex elements, isolated on transparent background`;
+        
+        const characterDetails = `Character: ${role}. Talent: ${talent}. Description: ${talentDesc}`;
+        
+        const prompt = `${basePrompt}. ${characterDetails}`;
         
         console.info('[server] 生成角色图片', {
             role,
             talent,
+            talentDesc: talentDesc.substring(0, 50),
             promptLength: prompt.length
         });
 
